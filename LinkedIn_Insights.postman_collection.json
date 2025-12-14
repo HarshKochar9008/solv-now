@@ -1,0 +1,334 @@
+{
+	"info": {
+		"_postman_id": "linkedin-insights-api",
+		"name": "LinkedIn Insights Microservice",
+		"description": "API collection for LinkedIn Insights Microservice - Scrape and analyze LinkedIn company pages",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			}
+		},
+		{
+			"name": "Root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			}
+		},
+		{
+			"name": "Get Page by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/pages/{{page_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pages",
+						"{{page_id}}"
+					]
+				},
+				"description": "Get page details by Page ID. If page is not in DB, it will scrape in real-time."
+			}
+		},
+		{
+			"name": "Search Pages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/pages?min_followers=20000&max_followers=40000&name_search=&industry=&page=1&page_size=10",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pages"
+					],
+					"query": [
+						{
+							"key": "min_followers",
+							"value": "20000",
+							"description": "Minimum follower count"
+						},
+						{
+							"key": "max_followers",
+							"value": "40000",
+							"description": "Maximum follower count"
+						},
+						{
+							"key": "name_search",
+							"value": "",
+							"description": "Search by page name (partial match)"
+						},
+						{
+							"key": "industry",
+							"value": "",
+							"description": "Filter by industry"
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"description": "Page number"
+						},
+						{
+							"key": "page_size",
+							"value": "10",
+							"description": "Items per page"
+						}
+					]
+				},
+				"description": "Search pages with filters (follower count range, name, industry) and pagination"
+			}
+		},
+		{
+			"name": "Search Pages by Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/pages?name_search=tech&page=1&page_size=10",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pages"
+					],
+					"query": [
+						{
+							"key": "name_search",
+							"value": "tech",
+							"description": "Search by page name"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "page_size",
+							"value": "10"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "Search Pages by Industry",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/pages?industry=Technology&page=1&page_size=10",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pages"
+					],
+					"query": [
+						{
+							"key": "industry",
+							"value": "Technology",
+							"description": "Filter by industry"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "page_size",
+							"value": "10"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "Search Pages by Follower Range",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/pages?min_followers=20000&max_followers=40000&page=1&page_size=10",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pages"
+					],
+					"query": [
+						{
+							"key": "min_followers",
+							"value": "20000"
+						},
+						{
+							"key": "max_followers",
+							"value": "40000"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "page_size",
+							"value": "10"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "Get Page Followers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/pages/{{page_id}}/followers?page=1&page_size=10",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pages",
+						"{{page_id}}",
+						"followers"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"description": "Page number"
+						},
+						{
+							"key": "page_size",
+							"value": "10",
+							"description": "Items per page"
+						}
+					]
+				},
+				"description": "Get list of followers for a given page (Note: Requires LinkedIn API for full functionality)"
+			}
+		},
+		{
+			"name": "Get Recent Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/pages/{{page_id}}/posts?limit=15",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pages",
+						"{{page_id}}",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "15",
+							"description": "Number of posts (1-25)"
+						}
+					]
+				},
+				"description": "Get recent 10-15 posts of a page"
+			}
+		},
+		{
+			"name": "Get Page Employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/pages/{{page_id}}/employees?page=1&page_size=10",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pages",
+						"{{page_id}}",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"description": "Page number"
+						},
+						{
+							"key": "page_size",
+							"value": "10",
+							"description": "Items per page"
+						}
+					]
+				},
+				"description": "Get list of employees working at the page"
+			}
+		},
+		{
+			"name": "Scrape Page",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/pages/{{page_id}}/scrape",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pages",
+						"{{page_id}}",
+						"scrape"
+					]
+				},
+				"description": "Manually trigger scraping for a page ID"
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "page_id",
+			"value": "deepsolv",
+			"type": "string"
+		}
+	]
+}
+
